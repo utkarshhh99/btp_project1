@@ -36,10 +36,10 @@ class HelloBlock extends StatelessWidget {
               Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context)=>SettingsScreen()));
             },
             child: CircleAvatar(
-              child: Text('U', style: TextStyle(color: Colors.white)),
+              child: Text('U', style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: deviceHeight*0.03)),
               radius: deviceWidth * 0.07,
-              backgroundColor: Color(0xFFff80b3),
-              foregroundColor: Color(0xFF800033),
+              backgroundColor: Color.fromRGBO(237,73,103, 1),
+              //foregroundColor: Color(0xFF800033),
             ),
           ),
         ],

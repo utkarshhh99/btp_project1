@@ -1,8 +1,14 @@
+import 'package:intl/intl.dart';
+
 import '../models/water.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 class LineChart extends StatefulWidget {
+  int val;
+
+  LineChart(this.val);
+
   @override
   _LineChartState createState() => _LineChartState();
 }
@@ -11,14 +17,27 @@ class _LineChartState extends State<LineChart> {
   List<charts.Series> data;
 
   List<charts.Series<Water, int>> _createData(){
+    List temp = [1,1,1,1,1,1,1];
+    var day = DateFormat('EEEE').format(DateTime.now());
+    Map<String , int> map = {
+      'Monday' : 0,
+      'Tuesday' : 1,
+      'Wednesday' : 2,
+      'Thursday' : 3,
+      'Friday' : 4,
+      'Saturday' : 5,
+      'Sunday' : 6
+    };
+    int x = map[day];
+    temp[x]=widget.val;
     final waterData = [
-      Water(day: 0, bottles: 1),
-      Water(day: 1, bottles: 1),
-      Water(day: 2, bottles: 5),
-      Water(day: 3, bottles: 10),
-      Water(day: 4, bottles: 6),
-      Water(day: 5, bottles: 8),
-      Water(day: 6, bottles: 3),
+      Water(day: 0, bottles: temp[0]),
+      Water(day: 1, bottles: temp[1]),
+      Water(day: 2, bottles: temp[2]),
+      Water(day: 3, bottles: temp[3]),
+      Water(day: 4, bottles: temp[4]),
+      Water(day: 5, bottles: temp[5]),
+      Water(day: 6, bottles: temp[6]),
 
     ];
     return [
@@ -70,7 +89,7 @@ class _LineChartState extends State<LineChart> {
       child: charts.LineChart(
         data,
         animate: true,
-        animationDuration: Duration(milliseconds: 1500),
+        animationDuration: Duration(milliseconds: 1800),
         domainAxis: charts.NumericAxisSpec(
           tickProviderSpec:
           charts.BasicNumericTickProviderSpec(desiredTickCount: 7),

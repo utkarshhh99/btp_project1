@@ -2,6 +2,8 @@ import '../widgets/lineChart1.dart';
 import '../widgets/lineChart.dart';
 import '../widgets/pieChart.dart';
 import 'package:flutter/material.dart';
+import 'package:btp_project1/models/tile_list.dart';
+import 'package:provider/provider.dart';
 
 class StatisticsScreen extends StatefulWidget {
   @override
@@ -14,6 +16,10 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    final activities =Provider.of<ActivityProvider>(context,listen: true).activities;
+    String m = Provider.of<ActivityProvider>(context).getMood();
+    int s = activities[0].value;
+    int w = activities[2].value;
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +34,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
             SizedBox(
               height: height * 0.05,
             ),
-            PiChart(),
+            PiChart(m),
             SizedBox(
               height: height * 0.05,
             ),
@@ -95,7 +101,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
             SizedBox(
               height: height * 0.03,
             ),
-            tab=='water' ? LineChart() : LineChart1(),
+            tab=='water' ? LineChart(w) : LineChart1(s),
           ],
         ),
     );

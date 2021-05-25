@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import '../models/tile_list.dart';
-//import '../models/activity_unit.dart';
 import 'package:provider/provider.dart';
-//import '../widgets/home_tile.dart';
 
-// ignore: must_be_immutable
 class BottomCustomSheet extends StatefulWidget {
-  //final Activity act;
   final int index;
-  //final int count;
   BottomCustomSheet({this.index,this.bottleCount});
    int bottleCount;
 
@@ -18,10 +13,6 @@ class BottomCustomSheet extends StatefulWidget {
 
 class _BottomCustomSheetState extends State<BottomCustomSheet> {
   
-  
-
-
-  //int bottleCount = 1;
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -68,12 +59,15 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
             ),
             Row(
               children: [
-                Text(
-                  act.modalText,
-                  //textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: deviceHeight * 0.022,
+                Flexible(
+                  child: Text(
+                    act.modalText,
+                    overflow: TextOverflow.visible,
+                    //textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: deviceHeight * 0.022,
+                    ),
                   ),
                 ),
               ],
@@ -86,7 +80,7 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: Color(0xFFff80b3),
+                    color: Color.fromRGBO(237,73,103, 1),
                     borderRadius: BorderRadius.circular(deviceWidth * 0.014),
                   ),
                   padding: EdgeInsets.all(1),
@@ -104,14 +98,14 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
                                 '-',
                                 style: TextStyle(
                                     fontSize: deviceHeight * 0.035,
-                                    color: Color(0xFFff80b3)),
+                                    color: Color.fromRGBO(237,73,103, 1)),
                               ),
                               onTap: () {
                                 
                                 setState(() {
                                   if (widget.bottleCount > 0){
                                    widget.bottleCount=widget.bottleCount-1;
-                                   print(widget.bottleCount);
+                                   //print(widget.bottleCount);
                                   }
                                 });
                               },
@@ -133,13 +127,13 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
                                 '+',
                                 style: TextStyle(
                                     fontSize: deviceHeight * 0.035,
-                                    color: Color(0xFFff80b3)),
+                                    color: Color.fromRGBO(237,73,103, 1)),
                               ),
                               onTap: () {
                                 setState(() {
                                   if(widget.bottleCount<24){
                                   widget.bottleCount++;
-                                  print(widget.bottleCount);
+                                  //print(widget.bottleCount);
                                   }
                                 });
                               },
@@ -168,7 +162,7 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
                       borderRadius: BorderRadius.circular(
                         deviceWidth * 0.014,
                       ),
-                      color: Color(0xFFff80b3),
+                      color: Color.fromRGBO(237,73,103, 1),
                     ),
                     child: Text(
                       'Confirm',

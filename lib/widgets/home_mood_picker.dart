@@ -1,4 +1,6 @@
+import 'package:btp_project1/models/tile_list.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MoodPicker extends StatefulWidget {
   @override
@@ -19,26 +21,26 @@ class _MoodPickerState extends State<MoodPicker> {
       children: [
         GestureDetector(
             onTap: () {
+              Provider.of<ActivityProvider>(context,listen: false).setMood("😁");
               int k = 0;
               tap[k] = 1 ^ tap[k];
               for (int i = 0; i < 5; i++) {
                 if (i != k) tap[i] = 0;
               }
-              print('tapped in 1st');
               setState(() {});
             },
             child: Column(
               children: [
                 CircleAvatar(
                   backgroundColor:
-                      tap[0] == 1 ? Colors.pink[500] : Color(0xFFff80b3),
+                      tap[0] == 1 ? Color.fromRGBO(237,73,103, 1) : Color.fromRGBO(240,201,218,1),
                   radius: outerRadius,
                   child: CircleAvatar(
                     child: Text(
                       '😁',
-                      style: TextStyle(fontSize: deviceHeight * 0.05),
+                      style: TextStyle(fontSize: deviceHeight * 0.044),
                     ),
-                    backgroundColor: Color(0xFFff80b3),
+                    backgroundColor: Color.fromRGBO(240,201,218,1),
                     radius: innerRadius,
                   ),
                 ),
@@ -48,7 +50,7 @@ class _MoodPickerState extends State<MoodPicker> {
                 Text(
                   'Very Good',
                   style: TextStyle(
-                    color: tap[0] == 1 ? Colors.pink[500] : Colors.black,
+                    color: tap[0] == 1 ? Color.fromRGBO(237,73,103, 1) : Colors.black,
                   ),
                 ),
               ],
@@ -56,6 +58,7 @@ class _MoodPickerState extends State<MoodPicker> {
         SizedBox(width: deviceWidth * 0.04),
         GestureDetector(
             onTap: () {
+              Provider.of<ActivityProvider>(context,listen: false).setMood("😃");
               int k = 1;
               tap[k] = 1 ^ tap[k];
               for (int i = 0; i < 5; i++) {
@@ -68,14 +71,14 @@ class _MoodPickerState extends State<MoodPicker> {
               children: [
                 CircleAvatar(
                   backgroundColor:
-                      tap[1] == 1 ? Colors.pink[500] : Color(0xFFff80b3),
+                      tap[1] == 1 ? Color.fromRGBO(237,73,103, 1) : Color.fromRGBO(240,201,218,1),
                   radius: outerRadius,
                   child: CircleAvatar(
                     child: Text(
                       '😃',
-                      style: TextStyle(fontSize: deviceHeight * 0.05),
+                      style: TextStyle(fontSize: deviceHeight * 0.044),
                     ),
-                    backgroundColor: Color(0xFFff80b3),
+                    backgroundColor: Color.fromRGBO(240,201,218,1),
                     radius: innerRadius,
                   ),
                 ),
@@ -85,7 +88,7 @@ class _MoodPickerState extends State<MoodPicker> {
                 Text(
                   'Good',
                   style: TextStyle(
-                    color: tap[1] == 1 ? Colors.pink[500] : Colors.black,
+                    color: tap[1] == 1 ? Color.fromRGBO(237,73,103, 1) : Colors.black,
                   ),
                 ),
               ],
@@ -93,6 +96,7 @@ class _MoodPickerState extends State<MoodPicker> {
         SizedBox(width: deviceWidth * 0.04),
         GestureDetector(
             onTap: () {
+              Provider.of<ActivityProvider>(context,listen: false).setMood("🙂");
               int k = 2;
               tap[k] = 1 ^ tap[k];
               for (int i = 0; i < 5; i++) {
@@ -106,14 +110,14 @@ class _MoodPickerState extends State<MoodPicker> {
               children: [
                 CircleAvatar(
                   backgroundColor:
-                      tap[2] == 1 ? Colors.pink[500]: Color(0xFFff80b3),
+                      tap[2] == 1 ? Color.fromRGBO(237,73,103, 1): Color.fromRGBO(240,201,218,1),
                   radius: outerRadius,
                   child: CircleAvatar(
                     child: Text(
                       '🙂',
-                      style: TextStyle(fontSize: deviceHeight * 0.05),
+                      style: TextStyle(fontSize: deviceHeight * 0.044),
                     ),
-                    backgroundColor: Color(0xFFff80b3),
+                    backgroundColor: Color.fromRGBO(240,201,218,1),
                     radius: innerRadius,
                   ),
                 ),
@@ -123,7 +127,7 @@ class _MoodPickerState extends State<MoodPicker> {
                 Text(
                   'Neutral',
                   style: TextStyle(
-                    color: tap[2] == 1 ? Colors.pink[500] : Colors.black,
+                    color: tap[2] == 1 ? Color.fromRGBO(237,73,103, 1) : Colors.black,
                   ),
                 ),
               ],
@@ -131,6 +135,7 @@ class _MoodPickerState extends State<MoodPicker> {
         SizedBox(width: deviceWidth * 0.04),
         GestureDetector(
             onTap: () {
+              Provider.of<ActivityProvider>(context,listen: false).setMood("🙁");
               int k = 3;
               tap[k] = 1 ^ tap[k];
               for (int i = 0; i < 5; i++) {
@@ -144,14 +149,14 @@ class _MoodPickerState extends State<MoodPicker> {
               children: [
                 CircleAvatar(
                   backgroundColor:
-                      tap[3] == 1 ? Colors.pink[500] : Color(0xFFff80b3),
+                      tap[3] == 1 ? Color.fromRGBO(237,73,103, 1) : Color.fromRGBO(240,201,218,1),
                   radius: outerRadius,
                   child: CircleAvatar(
                     child: Text(
                       '🙁',
-                      style: TextStyle(fontSize: deviceHeight * 0.05),
+                      style: TextStyle(fontSize: deviceHeight * 0.044),
                     ),
-                    backgroundColor: Color(0xFFff80b3),
+                    backgroundColor: Color.fromRGBO(240,201,218,1),
                     radius: innerRadius,
                   ),
                 ),
@@ -161,7 +166,7 @@ class _MoodPickerState extends State<MoodPicker> {
                 Text(
                   'Sad',
                   style: TextStyle(
-                    color: tap[3] == 1 ? Colors.pink[500] : Colors.black,
+                    color: tap[3] == 1 ? Color.fromRGBO(237,73,103, 1) : Colors.black,
                   ),
                 ),
               ],
@@ -169,6 +174,7 @@ class _MoodPickerState extends State<MoodPicker> {
         SizedBox(width: deviceWidth * 0.04),
         GestureDetector(
             onTap: () {
+              Provider.of<ActivityProvider>(context,listen: false).setMood("😞");
               int k = 4;
               tap[k] = 1 ^ tap[k];
               for (int i = 0; i < 5; i++) {
@@ -181,14 +187,14 @@ class _MoodPickerState extends State<MoodPicker> {
               children: [
                 CircleAvatar(
                   backgroundColor:
-                      tap[4] == 1 ? Colors.pink[500] : Color(0xFFff80b3),
+                      tap[4] == 1 ? Color.fromRGBO(237,73,103, 1) : Color.fromRGBO(240,201,218,1),
                   radius: outerRadius,
                   child: CircleAvatar(
                     child: Text(
                       '😞',
-                      style: TextStyle(fontSize: deviceHeight * 0.05),
+                      style: TextStyle(fontSize: deviceHeight * 0.044),
                     ),
-                    backgroundColor: Color(0xFFff80b3),
+                    backgroundColor: Color.fromRGBO(240,201,218,1),
                     radius: innerRadius,
                   ),
                 ),
@@ -198,7 +204,7 @@ class _MoodPickerState extends State<MoodPicker> {
                 Text(
                   'Very Sad',
                   style: TextStyle(
-                    color: tap[4] == 1 ? Colors.pink[500] : Colors.black,
+                    color: tap[4] == 1 ? Color.fromRGBO(237,73,103, 1) : Colors.black,
                   ),
                 ),
               ],

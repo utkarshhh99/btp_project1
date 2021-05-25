@@ -38,8 +38,8 @@ class HomeScreen extends StatelessWidget {
                   childAspectRatio: 1.0,
                   mainAxisExtent:  deviceHeight*0.2,
                   crossAxisCount: 2,
-                  crossAxisSpacing: 10.0,
-                  mainAxisSpacing: 10.0,
+                  crossAxisSpacing: deviceWidth*0.01,
+                  mainAxisSpacing: deviceHeight*0.01,
                 ),
                 itemCount: activities.length,
                   

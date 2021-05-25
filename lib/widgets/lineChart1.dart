@@ -1,8 +1,12 @@
 import '../models/sleep.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:intl/intl.dart';
 
 class LineChart1 extends StatefulWidget {
+  int val;
+
+  LineChart1(this.val);
   @override
   _LineChart1State createState() => _LineChart1State();
 }
@@ -11,14 +15,27 @@ class _LineChart1State extends State<LineChart1> {
   List<charts.Series> data;
 
   List<charts.Series<Sleep, int>> _createData(){
+    List temp = [1,1,1,1,1,1,1];
+    var day = DateFormat('EEEE').format(DateTime.now());
+    Map<String , int> map = {
+      'Monday' : 0,
+      'Tuesday' : 1,
+      'Wednesday' : 2,
+      'Thursday' : 3,
+      'Friday' : 4,
+      'Saturday' : 5,
+      'Sunday' : 6
+    };
+    int x = map[day];
+    temp[x]=widget.val;
     final waterData = [
-      Sleep(day: 0, hours: 1),
-      Sleep(day: 1, hours: 1),
-      Sleep(day: 2, hours: 5),
-      Sleep(day: 3, hours: 10),
-      Sleep(day: 4, hours: 6),
-      Sleep(day: 5, hours: 8),
-      Sleep(day: 6, hours: 3),
+      Sleep(day: 0, hours: temp[0]),
+      Sleep(day: 1, hours: temp[1]),
+      Sleep(day: 2, hours: temp[2]),
+      Sleep(day: 3, hours: temp[3]),
+      Sleep(day: 4, hours: temp[4]),
+      Sleep(day: 5, hours: temp[5]),
+      Sleep(day: 6, hours: temp[6]),
 
     ];
     return [
@@ -44,6 +61,8 @@ class _LineChart1State extends State<LineChart1> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
+
     final customTickFormatter =
     charts.BasicNumericTickFormatterSpec((num value) {
       if (value == 0) {

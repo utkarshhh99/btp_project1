@@ -8,6 +8,7 @@ class ActivityProvider extends ChangeNotifier{
   // final int value;
   // final String unit;
   // final String modalText;
+  String _mood = "";
   List<Activity> _activities = <Activity>[
   Activity(
     title: 'Sleep',
@@ -47,7 +48,13 @@ void setValue(int index,int amount){
   _activities[index].value=amount;
   notifyListeners();
 }
-
+void setMood(String m){
+  _mood=m;
+  notifyListeners();
+}
+String getMood(){
+  return _mood;
+}
 
 
 }

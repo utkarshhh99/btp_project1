@@ -50,7 +50,7 @@ class _HomeTileState extends State<HomeTile> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(deviceWidth * 0.05),
           ),
-          color: (fg == 0) ? Colors.white : Color(0xFFff80b3),
+          color: (fg == 0) ? Colors.white : Color.fromRGBO(237,73,103, 1),
           child: Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: deviceWidth * 0.035, vertical: deviceHeight * 0.04),
@@ -65,7 +65,7 @@ class _HomeTileState extends State<HomeTile> {
                       activity.title,
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: deviceHeight * 0.038),
+                          fontSize: deviceHeight * 0.03),
                     ),
                     activity.icon,
                   ],
