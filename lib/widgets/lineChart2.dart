@@ -1,20 +1,20 @@
-import '../models/sleep.dart';
+import '../models/workout.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:intl/intl.dart';
 
-class LineChart1 extends StatefulWidget {
+class LineChart2 extends StatefulWidget {
   int val;
 
-  LineChart1(this.val);
+  LineChart2(this.val);
   @override
-  _LineChart1State createState() => _LineChart1State();
+  _LineChart2State createState() => _LineChart2State();
 }
 
-class _LineChart1State extends State<LineChart1> {
+class _LineChart2State extends State<LineChart2> {
   List<charts.Series> data;
 
-  List<charts.Series<Sleep, int>> _createData(){
+  List<charts.Series<Workout, int>> _createData(){
     List temp = [1,1,1,1,1,1,1];
     var day = DateFormat('EEEE').format(DateTime.now());
     Map<String , int> map = {
@@ -28,24 +28,24 @@ class _LineChart1State extends State<LineChart1> {
     };
     int x = map[day];
     temp[x]=widget.val;
-    final sleepData = [
-      Sleep(day: 0, hours: temp[0]),
-      Sleep(day: 1, hours: temp[1]),
-      Sleep(day: 2, hours: temp[2]),
-      Sleep(day: 3, hours: temp[3]),
-      Sleep(day: 4, hours: temp[4]),
-      Sleep(day: 5, hours: temp[5]),
-      Sleep(day: 6, hours: temp[6]),
+    final workoutData = [
+      Workout(day: 0, hours: temp[0]),
+      Workout(day: 1, hours: temp[1]),
+      Workout(day: 2, hours: temp[2]),
+      Workout(day: 3, hours: temp[3]),
+      Workout(day: 4, hours: temp[4]),
+      Workout(day: 5, hours: temp[5]),
+      Workout(day: 6, hours: temp[6]),
 
     ];
     return [
-      charts.Series<Sleep, int>(
+      charts.Series<Workout, int>(
         id: "ok",
-        domainFn: (Sleep s, _) => s.day,
-        measureFn: (Sleep s, _) => s.hours,
-        colorFn: (Sleep s, _) =>
+        domainFn: (Workout w, _) => w.day,
+        measureFn: (Workout w, _) => w.hours,
+        colorFn: (Workout w, _) =>
             charts.Color.fromHex(code: '#ED4967'),
-        data: sleepData,
+        data: workoutData,
       )
     ];
   }
@@ -77,9 +77,9 @@ class _LineChart1State extends State<LineChart1> {
         return "Fri";
       } else if (value == 5) {
         return "Sat";
-      } 
-        return "Sun";
-      
+      }
+      return "Sun";
+
     });
     return Container(
       height: height * 0.3,

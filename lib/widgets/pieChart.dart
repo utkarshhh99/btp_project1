@@ -32,8 +32,8 @@ class _PiChartState extends State<PiChart> {
       '🙁' : 3,
       '😞' : 4,
     };
-    int x = map[widget.m];
-    temp[x] = 60.0;
+    //int x = map[widget.m];
+    //temp[x] = 60.0;
     return Container(
       height: height * 0.2,
       width: width * 0.9,

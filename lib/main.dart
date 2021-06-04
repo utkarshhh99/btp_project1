@@ -1,3 +1,7 @@
+import 'package:btp_project1/screens/home_screen.dart';
+import 'package:btp_project1/screens/logIn_screen.dart';
+import 'package:btp_project1/screens/verification_screen.dart';
+
 import './models/tile_list.dart';
 import 'package:flutter/material.dart';
 import './screens/tabScreen.dart';
@@ -23,7 +27,7 @@ class MyApp extends StatelessWidget {
             providers: [
               ChangeNotifierProvider<ActivityProvider>(create: (_) => ActivityProvider())
             ],
-            child: TabScreen(),
+            child: VerificationScreen(),
           );
         },
       ),

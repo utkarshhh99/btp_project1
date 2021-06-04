@@ -1,131 +1,80 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../models/report_duration.dart';
 
-class ReportTile extends StatefulWidget {
-  final Duration duration;
-  ReportTile({this.duration});
-  @override
-  _ReportTileState createState() => _ReportTileState();
-}
+class ReportTile extends StatelessWidget {
+  int i;
 
-class _ReportTileState extends State<ReportTile> {
-  bool flag = false;
+  ReportTile(this.i);
+
+  List<String> titles = ["DOMINANT MOOD", "SLEEP", "WATER", "EXERCISE"];
+  List<String> description = [
+    "Happy",
+    "8 hours/day",
+    "2.5 L/day",
+    "1 hour"
+  ];
+  List<String> comment = [
+    "You did great this week",
+    "Recommended 8 hours/day",
+    "Recommended 4 L/day",
+    "Recommended 1 hour/day"
+  ];
+  List<String> img = [
+    "assets/img3.jpg",
+    "assets/img.jpg",
+    "assets/img2.jpg",
+    "assets/img4.jpg"
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final deviceHeight = MediaQuery.of(context).size.height;
-    final deviceWidth = MediaQuery.of(context).size.width;
-    return Column(
-      children: [
-        SizedBox(
-              height: deviceHeight*0.01,
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(
+            horizontal: width * 0.03, vertical: height * 0.02),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              titles[i],
+              style: TextStyle(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17),
             ),
-        GestureDetector(
-          child: Container(
-            // margin: EdgeInsets.only(top: deviceHeight * 0.05),
-            decoration: BoxDecoration(
-              color: flag ? Colors.black : Color(0xFFff80b3),
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child: Container(
-              margin: EdgeInsets.all(1),
-              padding: EdgeInsets.only(
-                  top: deviceHeight * 0.01, bottom: deviceHeight * 0.01),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(5),
+            Container(
+              height: height * 0.06,
+              width: width * 0.1,
+              child: Image.asset(
+                img[i],
+                fit: BoxFit.cover,
               ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        '${widget.duration.start}',
-                        style: TextStyle(
-                          fontSize: deviceHeight * 0.02,
-                          color: flag ? Colors.black : Colors.pink,
-                        ),
-                      ),
-                      //     SizedBox(
-                      //     width: deviceWidth * 0.2,
-                      // ),
-                      Text(' - ',
-                          style: TextStyle(
-                            fontSize: deviceHeight * 0.02,
-                            color: flag ? Colors.black : Colors.pink,
-                          )),
-                      //SizedBox(
-                      //width: deviceWidth * 0.2,
-                      //),
-                      Text('${widget.duration.end}',
-                          style: TextStyle(
-                            fontSize: deviceHeight * 0.02,
-                            color: flag ? Colors.black : Colors.pink,
-                          )),
-                    ],
-                  ),
-                ],
-              ),
+              margin:
+                  EdgeInsets.only(bottom: height * 0.01, top: height * 0.007),
             ),
-          ),
-          onTap: () {
-            flag = !flag;
-            setState(() {});
-          },
-          //Drop Down Button//
-          //flag = true;
-        ),
-        Visibility(
-            visible: flag,
-//                child: Text('Hi'),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                TextButton(
-                    onPressed: () {
-                      print('Deleting Report');
-                    },
-                    child: Container(
-                      padding: EdgeInsets.only(
-                          top: deviceHeight * 0.01,
-                          bottom: deviceHeight * 0.01,
-                          left: deviceWidth * 0.02,
-                          right: deviceWidth * 0.02),
-                      child: Text(
-                        'Delete Report',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.pink,
-                          borderRadius: BorderRadius.circular(5)),
-                    )),
-                TextButton(
-                    onPressed: () {
-                      //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => ReportPage()));
-                      print('Opening Report');
-                    },
-                    child: Container(
-                      padding: EdgeInsets.only(
-                          top: deviceHeight * 0.01,
-                          bottom: deviceHeight * 0.01,
-                          left: deviceWidth * 0.02,
-                          right: deviceWidth * 0.02),
-                      child: Text(
-                        'View Report',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.pink,
-                          borderRadius: BorderRadius.circular(5)),
-                    )),
-              ],
-            )),
+            Text(
+              description[i],
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
             SizedBox(
-              height: deviceHeight*0.01,
+              height: height * 0.008,
             ),
-      ],
+            Text(
+              comment[i],
+              style: TextStyle(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

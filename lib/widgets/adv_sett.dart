@@ -13,7 +13,7 @@ class _AdvSettState extends State<AdvSett> {
   bool noti = true;
   bool sleep = true;
   bool water = true;
-
+  bool exercise = true;
   Widget _buildSwitchListTile(
       String title,
       bool currentValue,
@@ -43,6 +43,9 @@ class _AdvSettState extends State<AdvSett> {
         });}),
         _buildSwitchListTile("Water Tracker", water, (val){ setState(() {
           water = val;
+        });}),
+        _buildSwitchListTile("Exercise Tracker", exercise, (val){ setState(() {
+          exercise = val;
         });}),
       ],
     );

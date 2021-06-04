@@ -1,4 +1,4 @@
-import '../screens/week_picker.dart';
+import 'package:btp_project1/screens/report_screen.dart';
 
 import '../screens/home_screen.dart';
 import '../screens/statisticsScreen.dart';
@@ -14,8 +14,8 @@ class _TabScreenState extends State<TabScreen> {
   int _selectedPageIndex =0;
   List<Widget> _pages = [
       HomeScreen(),
-      StatisticsScreen(), 
-      WeekPicker(), 
+      StatisticsScreen(),
+    ReportScreen(),
     ];
 
   @override
