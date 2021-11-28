@@ -1,16 +1,69 @@
-import 'package:btp_project1/screens/tabScreen.dart';
 import 'package:btp_project1/widgets/user_input.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../models/tile_list.dart';
+import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class LoginScreen extends StatefulWidget {
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _isLogin = true;
+  bool isLoading = false;
+  bool _isLogin = false;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  static TextEditingController _emailController = new TextEditingController();
+  static TextEditingController _passwordController = new TextEditingController();
+  static TextEditingController _confirm = new TextEditingController();
+  static TextEditingController _userName = new TextEditingController();
+  static TextEditingController _phone = new TextEditingController();
+
+  void _makeUser(BuildContext context) async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+      if (_isLogin) {
+        UserCredential user = await _auth.signInWithEmailAndPassword(
+            email: _emailController.text, password: _passwordController.text);
+      } else {
+        if (_passwordController.text == _confirm.text){
+          UserCredential user = await _auth.createUserWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text);
+          final url = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/users.json");
+          final response = await http.post(url,body:json.encode({
+            'email': _emailController.text,
+            'password':_passwordController.text,
+            'userName' : _userName.text,
+            'phone' : _phone.text,
+            'id' : _auth.currentUser.uid,
+          }) );
+        } else {
+          /*Scaffold.of(context)
+              .showSnackBar(SnackBar(content: Text("Match the passwords!")));*/
+        }
+      }
+    } on PlatformException catch (err) {
+      var message = 'Please check your credentials';
+      if (err.message != null) {
+        message = err.message;
+      }
+      /* Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text(message),
+      ));*/
+      setState(() {
+        isLoading = false;
+      });
+    } catch (err) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -29,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
               style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: height*0.06,),
-            UserInput(_isLogin),
+            UserInput(_isLogin,_emailController,_passwordController,_confirm,_userName,_phone),
             Container(
                 width: width,
                 height: height * 0.06,
@@ -38,18 +91,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   textColor: Colors.white,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> TabScreen(),));
-                    // final _passProvider= Provider.of<ActivityProvider>(context,listen: false);
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: (BuildContext context) => ChangeNotifierProvider.value(value: _passProvider,child:TabScreen(),) 
-                        
-                    //     ),
-                    // );
-                    //Navigator.of(context).restorablePushReplacement((context, arguments) => null)
-                  },
-                  child: Text(
+                  onPressed: ()=> _makeUser(context),
+                  child: isLoading
+                      ? CircularProgressIndicator(
+                      valueColor: new AlwaysStoppedAnimation<Color>(
+                          Colors.white)) : Text(
                     "Confirm",
                     style: TextStyle(fontSize: 20),
                   ),

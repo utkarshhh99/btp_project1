@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "40561997285",
+    "firebase_url": "https://tracker-deck-default-rtdb.firebaseio.com",
+    "project_id": "tracker-deck",
+    "storage_bucket": "tracker-deck.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40561997285:android:d99f7c4c358b82884bab0c",
+        "android_client_info": {
+          "package_name": "com.example.btp_project1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40561997285-mvhrdbg67i443t4i986kva3vs0kl8sc8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa_gZEtrpwNwXwYDtuTUhKCkKH0lkUCtY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40561997285-mvhrdbg67i443t4i986kva3vs0kl8sc8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

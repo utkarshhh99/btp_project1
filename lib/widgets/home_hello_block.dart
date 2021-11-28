@@ -1,6 +1,7 @@
 import '../screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
+
 class HelloBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -30,9 +31,8 @@ class HelloBlock extends StatelessWidget {
               ),
             ],
           ),
-          //SizedBox(width:deviceWidth*0.1),
           GestureDetector(
-            onTap: (){
+            onTap: ()async{
               Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context)=>SettingsScreen()));
             },
             child: CircleAvatar(
