@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class PiChart extends StatefulWidget {
-  String m;
+  final String m;
 
   PiChart(this.m);
 
@@ -25,13 +25,13 @@ class _PiChartState extends State<PiChart> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     List temp = [10.0,10.0,10.0,10.0,10.0];
-    Map<String , int> map = {
-      '😁' : 0,
-      '😃' : 1,
-      '🙂' : 2,
-      '🙁' : 3,
-      '😞' : 4,
-    };
+    // Map<String , int> map = {
+    //   '😁' : 0,
+    //   '😃' : 1,
+    //   '🙂' : 2,
+    //   '🙁' : 3,
+    //   '😞' : 4,
+    // };
     //int x = map[widget.m];
     //temp[x] = 60.0;
     return Container(

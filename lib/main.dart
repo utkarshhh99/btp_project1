@@ -15,22 +15,37 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Builder(
+    // return MaterialApp(
+    //   title: 'Flutter Demo',
+    //   debugShowCheckedModeBanner: false,
+    //   theme: ThemeData(
+    //     primarySwatch: Colors.blue,
+    //   ),
+    //   home: Builder(
+    //     builder: (BuildContext context) {
+    //       return MultiProvider(
+    //         providers: [
+    //           ChangeNotifierProvider<ActivityProvider>(create: (_) => ActivityProvider())
+    //         ],
+    //         child: LoginScreen(),
+    //       );
+    return Builder(
         builder: (BuildContext context) {
           return MultiProvider(
             providers: [
               ChangeNotifierProvider<ActivityProvider>(create: (_) => ActivityProvider())
             ],
-            child: VerificationScreen(),
+            child: MaterialApp(
+                title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: LoginScreen(),
+            ),
           );
         },
-      ),
+     // ),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class UserInput extends StatelessWidget {
-  bool _isLogin;
+  final bool _isLogin;
 
   UserInput(this._isLogin);
 

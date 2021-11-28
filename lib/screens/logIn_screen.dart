@@ -1,6 +1,8 @@
 import 'package:btp_project1/screens/tabScreen.dart';
 import 'package:btp_project1/widgets/user_input.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../models/tile_list.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -37,7 +39,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> TabScreen()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> TabScreen(),));
+                    // final _passProvider= Provider.of<ActivityProvider>(context,listen: false);
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //     builder: (BuildContext context) => ChangeNotifierProvider.value(value: _passProvider,child:TabScreen(),) 
+                        
+                    //     ),
+                    // );
+                    //Navigator.of(context).restorablePushReplacement((context, arguments) => null)
                   },
                   child: Text(
                     "Confirm",

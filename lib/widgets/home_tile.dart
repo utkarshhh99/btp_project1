@@ -29,13 +29,13 @@ class _HomeTileState extends State<HomeTile> {
           setState(() {
             fg=1;
           });
-          final myProvider=Provider.of<ActivityProvider>(context,listen: false);
+          final _myProvider=Provider.of<ActivityProvider>(context,listen: false);
           showModalBottomSheet<void>(
             //isDismissible: false,
 
             context: context,
             builder: (BuildContext context) {
-              return ChangeNotifierProvider.value(value: myProvider,child:BottomCustomSheet(index:widget.index,bottleCount:activity.value));
+              return ChangeNotifierProvider.value(value: _myProvider,child:BottomCustomSheet(index:widget.index,bottleCount:activity.value));
               //BottomCustomSheet(index:widget.index);
             },
 

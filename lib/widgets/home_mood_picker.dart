@@ -1,4 +1,6 @@
+import 'package:btp_project1/models/activity_unit.dart';
 import 'package:btp_project1/models/tile_list.dart';
+import '../widgets/mood_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +18,27 @@ class _MoodPickerState extends State<MoodPicker> {
     final deviceHeight = MediaQuery.of(context).size.height;
     var innerRadius = deviceWidth * 0.058;
     var outerRadius = deviceWidth * 0.062;
+    void showOptions(int index){
+        List options=Provider.of<ActivityProvider>(context,listen: false).moodOptions[index];
+        Map frequency=Provider.of<ActivityProvider>(context,listen: false).frequency;
+        //final _myProvider=Provider.of<ActivityProvider>(context,listen: false);
+          showModalBottomSheet<void>(
+            //isDismissible: false,
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder: (BuildContext context) {
+              return MoodBottomSheet(display: options,frequency: frequency,);
+              //return ChangeNotifierProvider.value(value: _myProvider,child: MoodBottomSheet(display: options,));
+              //BottomCustomSheet(index:widget.index);
+            },
+
+          );
+
+
+
+
+    }
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -27,6 +50,7 @@ class _MoodPickerState extends State<MoodPicker> {
               for (int i = 0; i < 5; i++) {
                 if (i != k) tap[i] = 0;
               }
+              showOptions(k);
               setState(() {});
             },
             child: Column(
@@ -65,6 +89,7 @@ class _MoodPickerState extends State<MoodPicker> {
                 if (i != k) tap[i] = 0;
               }
               print('tapped in 2nd');
+              showOptions(k);
               setState(() {});
             },
             child: Column(
@@ -104,6 +129,7 @@ class _MoodPickerState extends State<MoodPicker> {
               }
 
               print('tapped in 3rd');
+              showOptions(k);
               setState(() {});
             },
             child: Column(
@@ -143,6 +169,7 @@ class _MoodPickerState extends State<MoodPicker> {
               }
 
               print('tapped in 4th');
+              showOptions(k);
               setState(() {});
             },
             child: Column(
@@ -181,6 +208,7 @@ class _MoodPickerState extends State<MoodPicker> {
                 if (i != k) tap[i] = 0;
               }
               print('tapped in 5th');
+              showOptions(k);
               setState(() {});
             },
             child: Column(

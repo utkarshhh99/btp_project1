@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 class BottomCustomSheet extends StatefulWidget {
   final int index;
   BottomCustomSheet({this.index,this.bottleCount});
-   int bottleCount;
+  int bottleCount;
 
   @override
   _BottomCustomSheetState createState() => _BottomCustomSheetState();

@@ -2,24 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ReportTile extends StatelessWidget {
-  int i;
+  final int i;
 
   ReportTile(this.i);
 
-  List<String> titles = ["DOMINANT MOOD", "SLEEP", "WATER", "EXERCISE"];
-  List<String> description = [
+  final List<String> titles = ["DOMINANT MOOD", "SLEEP", "WATER", "EXERCISE"];
+  final List<String> description = [
     "Happy",
     "8 hours/day",
     "2.5 L/day",
     "1 hour"
   ];
-  List<String> comment = [
+  final List<String> comment = [
     "You did great this week",
     "Recommended 8 hours/day",
     "Recommended 4 L/day",
     "Recommended 1 hour/day"
   ];
-  List<String> img = [
+  final List<String> img = [
     "assets/img3.jpg",
     "assets/img.jpg",
     "assets/img2.jpg",
