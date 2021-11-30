@@ -1,9 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../models/tile_list.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class BottomCustomSheet extends StatefulWidget {
   final int index;
+
   BottomCustomSheet({this.index,this.bottleCount});
   int bottleCount;
 
@@ -12,6 +18,71 @@ class BottomCustomSheet extends StatefulWidget {
 }
 
 class _BottomCustomSheetState extends State<BottomCustomSheet> {
+
+  void storeData(int index, int count) async {
+    var now = DateTime.now();
+    int weekDay = now.day;
+    int month =now.month;
+    var user = FirebaseAuth.instance.currentUser.uid;
+    var monthStr= DateFormat.MMMM().format(now);
+    if(index==0){
+        final url = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/sleep.json");
+        final response = await http.get(url);
+        final extractedData = json.decode(response.body) as Map<String, dynamic>;
+        print(extractedData);
+        if(extractedData == null){      //if first time
+          print("NO data found");
+          final url1 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/sleep/${user}/$monthStr.json");
+          final response = await http.post(url1,body:json.encode({
+            weekDay.toString() : count,
+          }) );
+        }
+        else{
+          final url2 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/sleep/${user}/$monthStr.json");
+           final response = await http.patch(url2,body:json.encode({
+                 weekDay.toString(): count,
+              }) );
+          }
+    }
+    else if(index==1){
+        final url = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/workout.json");
+        final response = await http.get(url);
+        final extractedData = json.decode(response.body) as Map<String, dynamic>;
+        print(extractedData);
+        if(extractedData == null){      //if first time
+          print("NO data found");
+          final url1 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/workout/${user}/$monthStr.json");
+          final response = await http.post(url1,body:json.encode({
+            weekDay.toString() : count,
+          }) );
+        }
+        else{
+          final url2 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/workout/${user}/$monthStr.json");
+           final response = await http.patch(url2,body:json.encode({
+                 '31': count,
+              }) );
+          }
+    }
+    else{
+       final url = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/water.json");
+        final response = await http.get(url);
+        final extractedData = json.decode(response.body) as Map<String, dynamic>;
+        print(extractedData);
+        if(extractedData == null){      //if first time
+          print("NO data found");
+          final url1 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/water/${user}/$monthStr.json");
+          final response = await http.post(url1,body:json.encode({
+            weekDay.toString() : count,
+          }) );
+        }
+        else{
+          final url2 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/water/${user}/$monthStr.json");
+           final response = await http.patch(url2,body:json.encode({
+                 weekDay.toString(): count,
+              }) );
+          }
+    } 
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -172,6 +243,9 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
                   ),
                   onTap: () {
                     Provider.of<ActivityProvider>(context,listen: false).setValue(widget.index, widget.bottleCount);
+                    storeData(widget.index,widget.bottleCount);
+                    
+          
                     Navigator.of(context).pop();
                   },
                 ),

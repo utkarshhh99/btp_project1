@@ -79,7 +79,7 @@ class _MoodPickerState extends State<MoodPicker> {
                 ),
               ],
             )),
-        SizedBox(width: deviceWidth * 0.04),
+        SizedBox(width: deviceWidth * 0.035),
         GestureDetector(
             onTap: () {
               Provider.of<ActivityProvider>(context,listen: false).setMood("😃");
@@ -118,7 +118,7 @@ class _MoodPickerState extends State<MoodPicker> {
                 ),
               ],
             )),
-        SizedBox(width: deviceWidth * 0.04),
+        SizedBox(width: deviceWidth * 0.035),
         GestureDetector(
             onTap: () {
               Provider.of<ActivityProvider>(context,listen: false).setMood("🙂");
@@ -158,7 +158,7 @@ class _MoodPickerState extends State<MoodPicker> {
                 ),
               ],
             )),
-        SizedBox(width: deviceWidth * 0.04),
+        SizedBox(width: deviceWidth * 0.035),
         GestureDetector(
             onTap: () {
               Provider.of<ActivityProvider>(context,listen: false).setMood("🙁");
@@ -198,7 +198,7 @@ class _MoodPickerState extends State<MoodPicker> {
                 ),
               ],
             )),
-        SizedBox(width: deviceWidth * 0.04),
+        SizedBox(width: deviceWidth * 0.035),
         GestureDetector(
             onTap: () {
               Provider.of<ActivityProvider>(context,listen: false).setMood("😞");
