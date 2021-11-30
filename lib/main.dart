@@ -1,4 +1,5 @@
 import 'package:btp_project1/screens/logIn_screen.dart';
+import 'package:btp_project1/screens/splash_screen.dart';
 import 'package:btp_project1/screens/tabScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import './models/tile_list.dart';
@@ -15,7 +16,7 @@ void main() async{
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+    FirebaseAuth _auth = FirebaseAuth.instance;
     return Builder(
       builder: (BuildContext context) {
         return MultiProvider(
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
                 stream: _auth.authStateChanges(),
                 builder: (BuildContext ctx, snapshot) {
                   if (snapshot.hasData) {
-                    return TabScreen();
+                    return SplashScreen();
                   }
                   return LoginScreen();
                 }),

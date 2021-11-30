@@ -24,6 +24,7 @@ class _UserInputState extends State<UserInput> {
     return Form(
       child: Column(
         children: [
+          if(!widget._isLogin)
           Container(
             width: width,
             height: height * 0.065,
@@ -41,7 +42,6 @@ class _UserInputState extends State<UserInput> {
               cursorColor: Color.fromRGBO(237, 73, 103, 1),
             ),
           ),
-          if(!widget._isLogin)
           Container(
             width: width,
             height: height * 0.065,

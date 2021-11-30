@@ -6,17 +6,17 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class LoginScreen extends StatefulWidget {
-
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
-  bool _isLogin = false;
+  bool _isLogin = true;
   FirebaseAuth _auth = FirebaseAuth.instance;
   static TextEditingController _emailController = new TextEditingController();
-  static TextEditingController _passwordController = new TextEditingController();
+  static TextEditingController _passwordController =
+      new TextEditingController();
   static TextEditingController _confirm = new TextEditingController();
   static TextEditingController _userName = new TextEditingController();
   static TextEditingController _phone = new TextEditingController();
@@ -30,17 +30,19 @@ class _LoginScreenState extends State<LoginScreen> {
         UserCredential user = await _auth.signInWithEmailAndPassword(
             email: _emailController.text, password: _passwordController.text);
       } else {
-        if (_passwordController.text == _confirm.text){
+        if (_passwordController.text == _confirm.text) {
           UserCredential user = await _auth.createUserWithEmailAndPassword(
               email: _emailController.text, password: _passwordController.text);
-          final url = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/users.json");
-          final response = await http.post(url,body:json.encode({
-            'email': _emailController.text,
-            'password':_passwordController.text,
-            'userName' : _userName.text,
-            'phone' : _phone.text,
-            'id' : _auth.currentUser.uid,
-          }) );
+          final url = Uri.parse(
+              "https://tracker-deck-default-rtdb.firebaseio.com/users.json");
+          final response = await http.post(url,
+              body: json.encode({
+                'email': _emailController.text,
+                'password': _passwordController.text,
+                'userName': _userName.text,
+                'phone': _phone.text,
+                'id': _auth.currentUser.uid,
+              }));
         } else {
           /*Scaffold.of(context)
               .showSnackBar(SnackBar(content: Text("Match the passwords!")));*/
@@ -81,8 +83,11 @@ class _LoginScreenState extends State<LoginScreen> {
               _isLogin ? "WELCOME BACK !" : "WELCOME !",
               style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: height*0.06,),
-            UserInput(_isLogin,_emailController,_passwordController,_confirm,_userName,_phone),
+            SizedBox(
+              height: height * 0.06,
+            ),
+            UserInput(_isLogin, _emailController, _passwordController, _confirm,
+                _userName, _phone),
             Container(
                 width: width,
                 height: height * 0.06,
@@ -91,11 +96,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   textColor: Colors.white,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
-                  onPressed: ()=> _makeUser(context),
-                  child: isLoading
-                      ? CircularProgressIndicator(
-                      valueColor: new AlwaysStoppedAnimation<Color>(
-                          Colors.white)) : Text(
+                  onPressed: () => _makeUser(context),
+                  child: Text(
                     "Confirm",
                     style: TextStyle(fontSize: 20),
                   ),
@@ -105,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Text(
                   _isLogin ? "Not a member ?" : "Already a member ?",
-                  style: TextStyle(fontWeight: FontWeight.w600,fontSize: 17),
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
                 ),
                 FlatButton(
                   onPressed: () {
@@ -114,7 +116,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     });
                   },
                   child: Text(_isLogin ? "Sign up" : "Log in",
-                      style: TextStyle(fontWeight: FontWeight.w600,fontSize: 17)),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 17)),
                   textColor: Color.fromRGBO(237, 73, 103, 1),
                 )
               ],

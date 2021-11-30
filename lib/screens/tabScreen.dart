@@ -1,31 +1,35 @@
 import 'dart:io';
-
 import 'package:btp_project1/screens/report_screen.dart';
-
 import '../screens/home_screen.dart';
 import '../screens/statisticsScreen.dart';
 import 'package:flutter/material.dart';
+// ignore: must_be_immutable
 class TabScreen extends StatefulWidget {
+  List<String> userData;
+
+  TabScreen(this.userData);
+
   @override
   _TabScreenState createState() => _TabScreenState();
 }
 
 class _TabScreenState extends State<TabScreen> {
-  //List<Widget> _pages;
+  //List user;
   PageController _pageController;
   int _selectedPageIndex =0;
-  List<Widget> _pages = [
-      HomeScreen(),
-      StatisticsScreen(),
-    ReportScreen(),
-    ];
-
+  List<Widget> _pages;
   @override
   void initState() {
     super.initState();
+    _pages = [
+      HomeScreen(widget.userData),
+      StatisticsScreen(),
+      ReportScreen(),
+    ];
     _pageController=PageController(initialPage: _selectedPageIndex);
     
   }
+
   @override
   void dispose() {
     _pageController.dispose();

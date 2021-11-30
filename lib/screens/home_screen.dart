@@ -7,6 +7,10 @@ import '../models/tile_list.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
+  List user;
+
+  HomeScreen(this.user);
+
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -24,7 +28,7 @@ class HomeScreen extends StatelessWidget {
             child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              HelloBlock(),
+              HelloBlock(user),
               SizedBox(
                 height: deviceHeight * 0.04,
               ),
@@ -42,14 +46,14 @@ class HomeScreen extends StatelessWidget {
                   mainAxisSpacing: deviceHeight*0.01,
                 ),
                 itemCount: activities.length,
-                  
+
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context,int index) {
                     return HomeTile(index:index);
-                    
+
                   }),
-                
-              
+
+
             ],
           ),
         ),
