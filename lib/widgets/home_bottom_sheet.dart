@@ -38,7 +38,12 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
           }) );
         }
         else{
-          final url2 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/sleep/${user}/$monthStr.json");
+          Map<String,dynamic> inner = extractedData[user][monthStr];
+          String k = "";
+          inner.forEach((key, value) {
+            k = key;
+          });
+          final url2 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/sleep/${user}/$monthStr/$k.json");
            final response = await http.patch(url2,body:json.encode({
                  weekDay.toString(): count,
               }) );
@@ -57,9 +62,14 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
           }) );
         }
         else{
-          final url2 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/workout/${user}/$monthStr.json");
+          Map<String,dynamic> inner = extractedData[user][monthStr];
+          String k = "";
+          inner.forEach((key, value) {
+            k = key;
+          });
+          final url2 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/workout/${user}/$monthStr/$k.json");
            final response = await http.patch(url2,body:json.encode({
-                 '31': count,
+                 weekDay.toString(): count,
               }) );
           }
     }
@@ -76,7 +86,12 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
           }) );
         }
         else{
-          final url2 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/water/${user}/$monthStr.json");
+          Map<String,dynamic> inner = extractedData[user][monthStr];
+          String k = "";
+          inner.forEach((key, value) {
+            k = key;
+          });
+          final url2 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/water/${user}/$monthStr/$k.json");
            final response = await http.patch(url2,body:json.encode({
                  weekDay.toString(): count,
               }) );

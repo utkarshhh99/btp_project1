@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if(extractedData == null){
       print("NO data found");
     }
-    print(extractedData);
+
     List<String> userData = [" "," "," "];
     extractedData.forEach((key, value) {
       userData[0] = value['userName'];
