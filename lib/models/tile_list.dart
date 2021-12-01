@@ -86,7 +86,7 @@ List<List<String>> _moodOptions =[
 
 Map<String,int> frequency = {
   'Had fun with loved ones':0,
-  'Had a good day at work/school':0,
+  'Had a good day at work':0,
   'Accomplished a goal':0,
   'Spent time with loved ones':0,
   'Did something I enjoy':0,
