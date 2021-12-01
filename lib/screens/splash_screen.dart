@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:intl/intl.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -19,12 +20,66 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> fetchData()async{
 
     var user = FirebaseAuth.instance.currentUser.uid;
+    var now = DateTime.now();
+    int date = now.day;
+    var monthStr= DateFormat.MMMM().format(now);
+
     final filterString ='orderBy="id"&equalTo="$user"';
     var url = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/users.json?$filterString");
+    var url1 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/sleep/$user/$monthStr.json");
+    var url2 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/workout/$user/$monthStr.json");
+    var url3 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/water/$user/$monthStr.json");
+
     final response = await http.get(url);
+    final response1 = await http.get(url1);
+    final response2 = await http.get(url2);
+    final response3 = await http.get(url3);
+
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
+    final extractedData1 = json.decode(response1.body) as Map<String, dynamic>;
+    final extractedData2 = json.decode(response2.body) as Map<String, dynamic>;
+    final extractedData3 = json.decode(response3.body) as Map<String, dynamic>;
+
+    int sleep = 0;
+    int workout = 0;
+    int water = 0;
+
     if(extractedData == null){
-      print("NO data found");
+      print("NO data found for user");
+    }
+    if(extractedData1 == null){
+      print("NO data found for sleep");
+    }
+    else{
+      extractedData1.forEach((key, value) {
+        sleep = value[date];
+      //   if(value.containsKey(date.toString())){
+      //     sleep = value[date.toString()];
+      //   }
+       });
+    }
+    if(extractedData2 == null){
+      print("NO data found for workout");
+    }
+    else{
+
+      extractedData2.forEach((key, value) {
+        workout = value[date];
+        // if(value.containsKey(date.toString())){
+        //   workout = value[date.toString()];
+        // }
+      });
+    }
+    if(extractedData3 == null){
+      print("NO data found for water");
+    }
+    else{
+      extractedData3.forEach((key, value) {
+        water = value[date];
+        // if(value.containsKey(date.toString())){
+        //   water = value[date.toString()];
+        // }
+      });
     }
 
     List<String> userData = [" "," "," "];
@@ -33,7 +88,8 @@ class _SplashScreenState extends State<SplashScreen> {
       userData[1] = value['email'];
       userData[2] = value['phone'];
     });
-    Navigator.push(context, MaterialPageRoute(builder: (ctx)=> TabScreen(userData)));
+
+    Navigator.push(context, MaterialPageRoute(builder: (ctx)=> TabScreen(userData,sleep,workout,water)));
   }
   @override
   Widget build(BuildContext context) {

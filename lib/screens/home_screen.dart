@@ -8,8 +8,10 @@ import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   List user;
-
-  HomeScreen(this.user);
+  int s;
+  int wo;
+  int wa;
+  HomeScreen(this.user,this.s,this.wo,this.wa);
 
   @override
   Widget build(BuildContext context) {

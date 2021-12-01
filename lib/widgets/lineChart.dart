@@ -1,12 +1,9 @@
-import 'package:intl/intl.dart';
-
 import '../models/water.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 class LineChart extends StatefulWidget {
-  int val;
-
+  Map<String,dynamic> val;
   LineChart(this.val);
 
   @override
@@ -17,19 +14,17 @@ class _LineChartState extends State<LineChart> {
   List<charts.Series> data;
 
   List<charts.Series<Water, int>> _createData(){
-    List temp = [1,1,1,1,1,1,1];
-    var day = DateFormat('EEEE').format(DateTime.now());
-    Map<String , int> map = {
-      'Monday' : 0,
-      'Tuesday' : 1,
-      'Wednesday' : 2,
-      'Thursday' : 3,
-      'Friday' : 4,
-      'Saturday' : 5,
-      'Sunday' : 6
-    };
-    int x = map[day];
-    temp[x]=widget.val;
+    List temp = [0,0,0,0,0,0,0];
+    var now = DateTime.now();
+    int date = now.day;  //1
+    //int date = 9;
+    temp[6] = widget.val[date.toString()];
+    for(int i=6;i>0;i--){
+      if(widget.val.containsKey((date-i).toString()) && (date-i)!=0){
+        temp[6-i] = widget.val[(date-i).toString()];
+      }
+    }
+
     final waterData = [
       Water(day: 0, bottles: temp[0]),
       Water(day: 1, bottles: temp[1]),
@@ -63,22 +58,24 @@ class _LineChartState extends State<LineChart> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    var now = DateTime.now();
+    int date = now.day;
     final customTickFormatter =
     charts.BasicNumericTickFormatterSpec((num value) {
       if (value == 0) {
-        return "Mon";
+        return (date-6).toString();
       } else if (value == 1) {
-        return "Tue";
+        return (date-5).toString();
       } else if (value == 2) {
-        return "Wed";
+        return (date-4).toString();
       } else if (value == 3) {
-        return "Thr";
+        return (date-3).toString();
       } else if (value == 4) {
-        return "Fri";
+        return (date-2).toString();
       } else if (value == 5) {
-        return "Sat";
+        return (date-1).toString();
       } 
-        return "Sun";
+        return date.toString();
       
     });
     return Container(

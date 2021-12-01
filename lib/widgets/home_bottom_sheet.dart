@@ -25,8 +25,9 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
     int month =now.month;
     var user = FirebaseAuth.instance.currentUser.uid;
     var monthStr= DateFormat.MMMM().format(now);
+    print("while confirming "+weekDay.toString() + monthStr);
     if(index==0){
-        final url = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/sleep.json");
+        final url = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/sleep/${user}/$monthStr.json");
         final response = await http.get(url);
         final extractedData = json.decode(response.body) as Map<String, dynamic>;
         print(extractedData);
@@ -38,9 +39,8 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
           }) );
         }
         else{
-          Map<String,dynamic> inner = extractedData[user][monthStr];
           String k = "";
-          inner.forEach((key, value) {
+          extractedData.forEach((key, value) {
             k = key;
           });
           final url2 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/sleep/${user}/$monthStr/$k.json");
@@ -50,7 +50,7 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
           }
     }
     else if(index==1){
-        final url = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/workout.json");
+        final url = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/workout/${user}/$monthStr.json");
         final response = await http.get(url);
         final extractedData = json.decode(response.body) as Map<String, dynamic>;
         print(extractedData);
@@ -62,9 +62,8 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
           }) );
         }
         else{
-          Map<String,dynamic> inner = extractedData[user][monthStr];
           String k = "";
-          inner.forEach((key, value) {
+          extractedData.forEach((key, value) {
             k = key;
           });
           final url2 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/workout/${user}/$monthStr/$k.json");
@@ -74,7 +73,7 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
           }
     }
     else{
-       final url = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/water.json");
+       final url = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/water/${user}/$monthStr.json");
         final response = await http.get(url);
         final extractedData = json.decode(response.body) as Map<String, dynamic>;
         print(extractedData);
@@ -86,9 +85,8 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
           }) );
         }
         else{
-          Map<String,dynamic> inner = extractedData[user][monthStr];
           String k = "";
-          inner.forEach((key, value) {
+          extractedData.forEach((key, value) {
             k = key;
           });
           final url2 = Uri.parse("https://tracker-deck-default-rtdb.firebaseio.com/water/${user}/$monthStr/$k.json");
@@ -105,7 +103,7 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
     final deviceHeight = MediaQuery.of(context).size.height;
     final activityList = Provider.of<ActivityProvider>(context).activities;
     final act =activityList[widget.index];
-    
+
     // @override
     // initState(){
     //     super.initState();

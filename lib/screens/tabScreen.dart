@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class TabScreen extends StatefulWidget {
   List<String> userData;
+  int s;
+  int wo;
+  int wa;
 
-  TabScreen(this.userData);
+  TabScreen(this.userData,this.s,this.wo,this.wa);
 
   @override
   _TabScreenState createState() => _TabScreenState();
@@ -22,7 +25,7 @@ class _TabScreenState extends State<TabScreen> {
   void initState() {
     super.initState();
     _pages = [
-      HomeScreen(widget.userData),
+      HomeScreen(widget.userData,widget.s,widget.wo,widget.wa),
       StatisticsScreen(),
       ReportScreen(),
     ];
