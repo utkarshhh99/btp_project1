@@ -18,12 +18,13 @@ class _LineChart1State extends State<LineChart1> {
     var now = DateTime.now();
     int date = now.day;  //1
     //int date = 9;
-    temp[6] = widget.val[date.toString()];
+    temp[6] = widget.val[date.toString()] == null ? 0 : widget.val[date.toString()];
     for(int i=6;i>0;i--){
       if(widget.val.containsKey((date-i).toString()) && (date-i)!=0){
         temp[6-i] = widget.val[(date-i).toString()];
       }
     }
+    //print(temp);
     final sleepData = [
       Sleep(day: 0, hours: temp[0]),
       Sleep(day: 1, hours: temp[1]),

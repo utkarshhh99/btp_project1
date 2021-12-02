@@ -23,7 +23,7 @@ class ActivityProvider extends ChangeNotifier{
   Activity(
     title: 'Workout',
     icon: Icon(
-      Icons.face,
+      Icons.accessibility,
       color: Colors.yellow,
     ),
     value: 0,
@@ -33,7 +33,7 @@ class ActivityProvider extends ChangeNotifier{
   Activity(
     title: 'Water',
     icon: Icon(
-      Icons.water_damage,
+      Icons.local_drink,
       color: Colors.yellow,
     ),
     value: 0,

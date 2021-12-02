@@ -51,11 +51,10 @@ class _SplashScreenState extends State<SplashScreen> {
       print("NO data found for sleep");
     }
     else{
+
       extractedData1.forEach((key, value) {
+        if(value.length>= date+1)
         sleep = value[date];
-      //   if(value.containsKey(date.toString())){
-      //     sleep = value[date.toString()];
-      //   }
        });
     }
     if(extractedData2 == null){
@@ -64,10 +63,8 @@ class _SplashScreenState extends State<SplashScreen> {
     else{
 
       extractedData2.forEach((key, value) {
+        if(value.length>= date+1)
         workout = value[date];
-        // if(value.containsKey(date.toString())){
-        //   workout = value[date.toString()];
-        // }
       });
     }
     if(extractedData3 == null){
@@ -75,10 +72,8 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     else{
       extractedData3.forEach((key, value) {
+        if(value.length>= date+1)
         water = value[date];
-        // if(value.containsKey(date.toString())){
-        //   water = value[date.toString()];
-        // }
       });
     }
 

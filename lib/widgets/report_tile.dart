@@ -3,21 +3,23 @@ import 'package:flutter/material.dart';
 
 class ReportTile extends StatelessWidget {
   final int i;
+  double sleep;
+  double workout;
+  double water;
+  ReportTile(this.i,this.sleep,this.workout,this.water);
 
-  ReportTile(this.i);
-
-  final List<String> titles = ["DOMINANT MOOD", "SLEEP", "WATER", "EXERCISE"];
+  final List<String> titles = ["DOMINANT MOOD", "SLEEP", "WATER", "WORKOUT"];
   final List<String> description = [
     "Happy",
-    "8 hours/day",
-    "2.5 L/day",
-    "1 hour"
+    " hours/day",
+    " L/day",
+    " hour/day"
   ];
   final List<String> comment = [
     "You did great this week",
-    "Recommended 8 hours/day",
-    "Recommended 4 L/day",
-    "Recommended 1 hour/day"
+    "Recommended 7-9 hrs/day",
+    "Recommended 2 L/day",
+    "Recommended 0.5 hrs/day"
   ];
   final List<String> img = [
     "assets/img3.jpg",
@@ -30,6 +32,9 @@ class ReportTile extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    String sl = sleep.toString().substring(0,3);
+    String wo = workout.toString().substring(0,3);
+    String wa = water.toString().substring(0,3);
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(
@@ -59,7 +64,7 @@ class ReportTile extends StatelessWidget {
                   EdgeInsets.only(bottom: height * 0.01, top: height * 0.007),
             ),
             Text(
-              description[i],
+              i==1 ? sl+description[i] : i==2 ? wa+description[i] : i==3 ? wo+description[i] : description[i],
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             SizedBox(

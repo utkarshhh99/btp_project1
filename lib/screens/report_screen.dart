@@ -19,7 +19,7 @@ class _ReportScreenState extends State<ReportScreen> {
         children: [
           SizedBox(height: height*0.08,),
           Text("Reports",style: TextStyle(fontSize: height*0.035,fontWeight: FontWeight.bold),),
-          ListView.builder(itemBuilder: (ctx,i)=> ReportItem(),itemCount: 13,shrinkWrap: true,physics: NeverScrollableScrollPhysics(),),
+          ListView.builder(itemBuilder: (ctx,i)=> ReportItem(),itemCount: 1,shrinkWrap: true,physics: NeverScrollableScrollPhysics(),),
         ],
       ),
     );

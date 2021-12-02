@@ -6,6 +6,7 @@ class ReportItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
     return InkWell(child: Column(
       children: [
         Container(
@@ -16,9 +17,9 @@ class ReportItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("WEEK 4",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20),),
+              Text("DECEMBER",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20),),
               SizedBox(height: height*0.01,),
-              Text("April 26th - May 1st",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 18,color: Colors.grey)),
+              Text("1st - 31st",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 18,color: Colors.grey)),
             ],
           ),
         ),
