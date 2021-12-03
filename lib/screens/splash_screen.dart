@@ -83,7 +83,8 @@ class _SplashScreenState extends State<SplashScreen> {
       userData[1] = value['email'];
       userData[2] = value['phone'];
     });
-
+    print(water);print(sleep);print(workout);
+    
     Navigator.push(context, MaterialPageRoute(builder: (ctx)=> TabScreen(userData,sleep,workout,water)));
   }
   @override

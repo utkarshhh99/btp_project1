@@ -45,6 +45,7 @@ class _MoodBottomSheetState extends State<MoodBottomSheet> {
           final response2 = await http.patch(url2, body: json.encode({
             key: curValue+value,
           }));
+          value=0;
         }
       });
     }

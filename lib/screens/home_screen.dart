@@ -13,12 +13,16 @@ class HomeScreen extends StatelessWidget {
   int wa;
   HomeScreen(this.user,this.s,this.wo,this.wa);
 
+
+  
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     //final activity = Provider.of<Activity>(context);
     final activities =Provider.of<ActivityProvider>(context).activities;
+    print(wa);
+    
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(
@@ -51,7 +55,7 @@ class HomeScreen extends StatelessWidget {
 
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context,int index) {
-                    return HomeTile(index:index);
+                    return HomeTile(index:index,s: s,wo: wo,wa: wa,);
 
                   }),
 

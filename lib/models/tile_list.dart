@@ -44,6 +44,21 @@ class ActivityProvider extends ChangeNotifier{
 
 List<Activity> get activities =>_activities;
 
+void setEValue(int amount){
+  _activities[1].value=amount;
+  notifyListeners();
+}
+
+void setWValue(int amount){
+  _activities[2].value=amount;
+  notifyListeners();
+}
+
+void setSValue(int amount){
+  _activities[0].value=amount;
+  notifyListeners();
+}
+
 void setValue(int index,int amount){
   _activities[index].value=amount;
   notifyListeners();
@@ -59,7 +74,7 @@ List<List<String>> get moodOptions =>_moodOptions;
 List<List<String>> _moodOptions =[
   [
     'Had fun with loved ones',
-    'Had a good day at work/school',
+    'Had a good day at work',
     'Accomplished a goal',
   ],
   [

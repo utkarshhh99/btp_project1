@@ -23,7 +23,13 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   Map<String, dynamic> sleep = {'0' : 0};
   Map<String, dynamic> workout = {'0' : 0};
   Map<String, dynamic> water = {'0' : 0};
-
+  Map<String,double> data = {
+      '😁' : 0.0,
+      '😃' : 0.0,
+      '🙂' : 0.0,
+      '🙁' : 0.0,
+      '😞' : 0.0,
+  } ;
   @override
   void initState() {
     // TODO: implement initState
@@ -75,6 +81,25 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
       });
     }
 
+    //var user = FirebaseAuth.instance.currentUser.uid;
+    //var now = DateTime.now();
+    //int weekDay = now.day;
+    //var monthStr = DateFormat.MMMM().format(now);
+    
+      final url = Uri.parse(
+          "https://tracker-deck-default-rtdb.firebaseio.com/moodfrequency/${user}/$monthStr.json");
+      final response = await http.get(url);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      String k = "";
+      extractedData.forEach((key, value) {
+        k = key;
+      });
+      Map<String, dynamic> inner = extractedData[k];
+      print(inner);
+      inner.forEach((key, value) {
+        data[key]=value.toDouble();
+      });
+
     setState(() {
       isLoading = false;
     });
@@ -110,7 +135,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                 SizedBox(
                   height: height * 0.05,
                 ),
-                PiChart(m),
+                PiChart(data),
                 SizedBox(
                   height: height * 0.05,
                 ),

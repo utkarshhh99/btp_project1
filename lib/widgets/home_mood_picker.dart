@@ -166,24 +166,55 @@ class _MoodPickerState extends State<MoodPicker> {
           }));
     }
 
+    Future<bool> checkState() async {
+      final url = Uri.parse(
+          "https://tracker-deck-default-rtdb.firebaseio.com/mood/${user}/$monthStr.json");
+
+      final response = await http.get(url);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      if (extractedData == null){ print(1);return Future<bool>.value(true);}
+      Map<String, dynamic> inner = extractedData;
+      print(inner);
+      String k = "";
+      inner.forEach((key, value) {
+        k = key;
+      });
+      final url2 = Uri.parse(
+          "https://tracker-deck-default-rtdb.firebaseio.com/mood/${user}/$monthStr/$k.json");
+      final response1 = await http.get(url2);
+      final extractedData1 = json.decode(response1.body) as Map<String, dynamic>;
+      print(extractedData1);
+      if (extractedData1.containsKey(DateTime.now().day.toString()))
+        return Future<bool>.value(false);
+
+      return Future<bool>.value(true);
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         GestureDetector(
-            onTap: () {
-              Provider.of<ActivityProvider>(context, listen: false)
-                  .setMood("😁");
-              int k = 0;
-              tap[k] = 1 ^ tap[k];
-              for (int i = 0; i < 5; i++) {
-                if (i != k) tap[i] = 0;
+            onTap: () async {
+              bool result = await checkState();
+              print(result);
+              if (result == true) {
+                Provider.of<ActivityProvider>(context, listen: false)
+                    .setMood("😁");
+                int k = 0;
+                tap[k] = 1 ^ tap[k];
+                for (int i = 0; i < 5; i++) {
+                  if (i != k) tap[i] = 0;
+                }
+
+                postMoodWithDate(k);
+                postMoodWithFreq(k);
+                sleep(Duration(seconds: 1));
+                showOptions(k);
+                setState(() {});
               }
-              
-              postMoodWithDate(k);
-              postMoodWithFreq(k);
-              sleep(Duration(seconds:1));
-              showOptions(k);
-              setState(() {});
+              else{
+                Scaffold.of(context).showSnackBar(SnackBar(content: Text("You have already entered mood today!"),));
+              }
             },
             child: Column(
               children: [
@@ -216,8 +247,10 @@ class _MoodPickerState extends State<MoodPicker> {
             )),
         SizedBox(width: deviceWidth * 0.035),
         GestureDetector(
-            onTap: () {
-              Provider.of<ActivityProvider>(context, listen: false)
+            onTap: () async {
+              bool result = await checkState();
+              if(result) {
+                  Provider.of<ActivityProvider>(context, listen: false)
                   .setMood("😃");
               int k = 1;
               tap[k] = 1 ^ tap[k];
@@ -225,12 +258,16 @@ class _MoodPickerState extends State<MoodPicker> {
                 if (i != k) tap[i] = 0;
               }
               print('tapped in 2nd');
-              
+
               postMoodWithDate(k);
               postMoodWithFreq(k);
-              sleep(Duration(seconds:1));
+              sleep(Duration(seconds: 1));
               showOptions(k);
               setState(() {});
+              }
+              else{
+                Scaffold.of(context).showSnackBar(SnackBar(content: Text("You have already entered mood today!"),));
+              }
             },
             child: Column(
               children: [
@@ -263,8 +300,10 @@ class _MoodPickerState extends State<MoodPicker> {
             )),
         SizedBox(width: deviceWidth * 0.035),
         GestureDetector(
-            onTap: () {
-              Provider.of<ActivityProvider>(context, listen: false)
+            onTap: () async  {
+              bool result = await checkState();
+              if(result) {
+                  Provider.of<ActivityProvider>(context, listen: false)
                   .setMood("🙂");
               int k = 2;
               tap[k] = 1 ^ tap[k];
@@ -273,12 +312,18 @@ class _MoodPickerState extends State<MoodPicker> {
               }
 
               print('tapped in 3rd');
-           
+
               postMoodWithDate(k);
               postMoodWithFreq(k);
-              sleep(Duration(seconds:1));
+              sleep(Duration(seconds: 1));
               showOptions(k);
               setState(() {});
+              }
+              else{
+                Scaffold.of(context).showSnackBar(SnackBar(content: Text("You have already entered mood today!"),));
+              }
+              
+              
             },
             child: Column(
               children: [
@@ -311,8 +356,10 @@ class _MoodPickerState extends State<MoodPicker> {
             )),
         SizedBox(width: deviceWidth * 0.035),
         GestureDetector(
-            onTap: () {
-              Provider.of<ActivityProvider>(context, listen: false)
+            onTap: () async {
+               bool result = await checkState();
+              if(result) {
+                  Provider.of<ActivityProvider>(context, listen: false)
                   .setMood("🙁");
               int k = 3;
               tap[k] = 1 ^ tap[k];
@@ -321,12 +368,21 @@ class _MoodPickerState extends State<MoodPicker> {
               }
 
               print('tapped in 4th');
-              
+
               postMoodWithDate(k);
               postMoodWithFreq(k);
-              sleep(Duration(seconds:1));
+              sleep(Duration(seconds: 1));
               showOptions(k);
               setState(() {});
+
+
+                
+              }
+              else{
+                Scaffold.of(context).showSnackBar(SnackBar(content: Text("You have already entered mood today!"),));
+              }
+               
+              
             },
             child: Column(
               children: [
@@ -359,8 +415,10 @@ class _MoodPickerState extends State<MoodPicker> {
             )),
         SizedBox(width: deviceWidth * 0.035),
         GestureDetector(
-            onTap: () {
-              Provider.of<ActivityProvider>(context, listen: false)
+            onTap: () async {
+              bool result = await checkState();
+              if(result) {
+                  Provider.of<ActivityProvider>(context, listen: false)
                   .setMood("😞");
               int k = 4;
               tap[k] = 1 ^ tap[k];
@@ -368,12 +426,21 @@ class _MoodPickerState extends State<MoodPicker> {
                 if (i != k) tap[i] = 0;
               }
               print('tapped in 5th');
-              
+
               postMoodWithDate(k);
               postMoodWithFreq(k);
-              sleep(Duration(seconds:1));
+              sleep(Duration(seconds: 1));
               showOptions(k);
               setState(() {});
+
+
+                
+              }
+              else{
+                Scaffold.of(context).showSnackBar(SnackBar(content: Text("You have already entered mood today!"),));
+              }
+              
+              
             },
             child: Column(
               children: [

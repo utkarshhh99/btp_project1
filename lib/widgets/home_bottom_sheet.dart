@@ -1,3 +1,4 @@
+import 'package:btp_project1/screens/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -257,9 +258,8 @@ class _BottomCustomSheetState extends State<BottomCustomSheet> {
                   onTap: () {
                     Provider.of<ActivityProvider>(context,listen: false).setValue(widget.index, widget.bottleCount);
                     storeData(widget.index,widget.bottleCount);
-                    
+                     Navigator.push(context, MaterialPageRoute(builder: (ctx)=>SplashScreen()));
           
-                    Navigator.of(context).pop();
                   },
                 ),
               ],

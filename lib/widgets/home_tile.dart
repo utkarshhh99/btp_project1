@@ -6,19 +6,31 @@ import 'package:provider/provider.dart';
 
 class HomeTile extends StatefulWidget {
   final index;
-  HomeTile({this.index});
+  int s;
+  int wo;
+  int wa;
+  HomeTile({this.index,this.s,this.wo,this.wa});
   @override
   _HomeTileState createState() => _HomeTileState();
 }
 
 class _HomeTileState extends State<HomeTile> {
   var fg = 0;
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  // print(widget.wa);
+  // print('cefewf');
+  //   super.initState();
+  // }
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     final activityList = Provider.of<ActivityProvider>(context).activities;
     final activity =activityList[widget.index];
+    final value = widget.index==1? widget.wo: widget.index==2? widget.wa: widget.s;
 
     return Container(
       // width: deviceWidth * 0.5,
@@ -74,7 +86,7 @@ class _HomeTileState extends State<HomeTile> {
                 //   height: deviceHeight * 0.05,
                 // ),
                 Text(
-                  '${activity.value} ${activity.unit}',
+                  '${value} ${activity.unit}',
                   //textAlign: TextAlign.left,
                   style: TextStyle(
                       fontWeight: FontWeight.w500,

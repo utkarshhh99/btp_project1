@@ -6,15 +6,18 @@ class ReportTile extends StatelessWidget {
   double sleep;
   double workout;
   double water;
-  ReportTile(this.i,this.sleep,this.workout,this.water);
+  String moodName;
+  String moodCom;
+  ReportTile(this.i,this.sleep,this.workout,this.water,this.moodName,this.moodCom);
 
   final List<String> titles = ["DOMINANT MOOD", "SLEEP", "WATER", "WORKOUT"];
-  final List<String> description = [
+   List<String> description = [
     "Happy",
     " hours/day",
     " L/day",
     " hour/day"
   ];
+ 
   final List<String> comment = [
     "You did great this week",
     "Recommended 7-9 hrs/day",
@@ -22,11 +25,24 @@ class ReportTile extends StatelessWidget {
     "Recommended 0.5 hrs/day"
   ];
   final List<String> img = [
-    "assets/img3.jpg",
+    "assets/img6.jpeg",
     "assets/img.jpg",
     "assets/img2.jpg",
     "assets/img4.jpg"
   ];
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   _fetchData();
+    
+  // }
+
+  // void _fetchData(){
+  //   print('111');
+  //    description[0] = moodName;
+  //    comment[0]= moodCom;
+
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -64,14 +80,14 @@ class ReportTile extends StatelessWidget {
                   EdgeInsets.only(bottom: height * 0.01, top: height * 0.007),
             ),
             Text(
-              i==1 ? sl+description[i] : i==2 ? wa+description[i] : i==3 ? wo+description[i] : description[i],
+              i==1 ? sl+description[i] : i==2 ? wa+description[i] : i==3 ? wo+description[i] : moodName,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             SizedBox(
               height: height * 0.008,
             ),
             Text(
-              comment[i],
+              i==0? moodCom:comment[i],
               style: TextStyle(
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
